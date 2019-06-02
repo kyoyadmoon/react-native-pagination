@@ -9,7 +9,8 @@ import {
   LayoutAnimation,
   StyleSheet,
   Text,
-  TouchableOpacity, View
+  TouchableOpacity, View,
+  ViewPropTypes
 } from 'react-native';
 import _ from 'lodash';
 _.mixin({ compactObject: (o) => _.each(o, (v, k) => {
@@ -49,7 +50,8 @@ class Pagination extends Component {
       paginationStyle,
       pagingEnabled,
       // ShowStartingJumpDot,showEndingJumpDot,endingJumpSize,startingJumpSize,
-      hideEmptyDots
+      hideEmptyDots,
+      dotsContainerStyle,
     } = this.props;
     paginationItems = paginationItems.map((item, i) => {
       item.paginationIndexId = i;
@@ -146,7 +148,8 @@ class Pagination extends Component {
             height: horizontal === false ? height : 30,
             flexDirection: horizontal == true ? 'row' : 'column',
             justifyContent: 'center',
-            alignItems: 'center' }
+            alignItems: 'center' },
+            dotsContainerStyle
         ]}
         >
                 <Dot
@@ -199,12 +202,14 @@ Pagination.defaultProps = {
   activeItemIndex: null,
   hideEmptyDotComponents: false,
   paginationItemPadSize: 3,
-  dotAnimation: LayoutAnimation.Presets.easeInEaseOut
+  dotAnimation: LayoutAnimation.Presets.easeInEaseOut,
+  dotsContainerStyle: {},
 };
 // NOT WORKING (I dont know why)
 Pagination.propTypes = {
   paginationItems: PropTypes.array,
-  visableItemList: PropTypes.array
+  visableItemList: PropTypes.array,
+  dotsContainerStyle: ViewPropTypes.style
 };
 export default Pagination;
 export { Icon, Dot };
